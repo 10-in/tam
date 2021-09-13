@@ -1,0 +1,31 @@
+{
+    "name": "shiren/tam",
+    "description": "实仁易学·理法",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Shiren\\TAM\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "shiyin-tech",
+            "email": "developer@10in.com"
+        },
+        {
+            "name": "qingliu",
+            "email": "soonio@qq.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    },
+    "scripts": {
+        "test": "phpunit -c phpunit.xml --colors=always"
+    }
+}
