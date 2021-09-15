@@ -8,6 +8,16 @@ namespace Shiren\TAM;
 class Algorithm
 {
     /**
+     * 根据天干索引转化为对应的阴阳索引
+     * @param int $gi 天干索引
+     * @return int
+     */
+    public static function gz2o(int $gi): int
+    {
+        return ($gi + 1) % 2;
+    }
+
+    /**
      * 根据天干索引转化为对应的五行索引
      * @param int $gi 天干索引
      * @return int

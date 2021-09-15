@@ -21,3 +21,14 @@
 |子|丑|寅|卯|辰|巳|午|未|申|酉|戌|亥|
 
 > 更多定义参考[Definition](./src/Definition.php)
+
+## 使用
+
+  - 天干转五行
+  ```php
+  echo \Shiren\TAM\Algorithm::g2e(0); // 0[甲] -> 1[木]
+  ```
+  - 干支转阴阳
+  ```php
+  echo \Shiren\TAM\Algorithm::gz2o(10); // 10[戌] -> 1[阳]
+  ```
