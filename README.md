@@ -42,9 +42,9 @@ composer require shiren/tam
   - 中文字符串化
     - 数字转地支
     ```php
-    echo \Shiren\TAM\Str::z(1, 2);
+    echo \Shiren\TAM\Str::z(1, 2, 3); // 丑寅卯
     ```
       - 数字转五神
     ```php
-    echo \Shiren\TAM\Str::spirits(1, 2);
+    echo \Shiren\TAM\Str::spirits(1, 2); // 比肩伤官
     ```
