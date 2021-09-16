@@ -1,6 +1,12 @@
 # 实仁易学理法算法核心
 > ShiRen`s Theory and method(TAM)
 
+## 安装
+
+```shell
+composer require shiren/tam
+```
+
 ## 五行定义
 
 |  0    |  1    |  2    |  3    |  4    |
