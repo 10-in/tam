@@ -113,7 +113,7 @@ class Algorithm
      */
     public static function zh(int $a, int $b): bool
     {
-        return (($a + $b) % 12 == 1) && (($a > $b) || (($b - $a) == 1));
+        return (($a + $b) % 12 == 1) && (($b > $a) || (($b - $a) == 1));
     }
 
     /**

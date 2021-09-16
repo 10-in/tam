@@ -23,12 +23,22 @@
 > 更多定义参考[Definition](./src/Definition.php)
 
 ## 使用
-
-  - 天干转五行
-  ```php
-  echo \Shiren\TAM\Algorithm::g2e(0); // 0[甲] -> 1[木]
-  ```
-  - 干支转阴阳
-  ```php
-  echo \Shiren\TAM\Algorithm::gz2o(10); // 10[戌] -> 1[阳]
-  ```
+  - 算法
+    - 天干转五行
+    ```php
+    echo \Shiren\TAM\Algorithm::g2e(0); // 0[甲] -> 1[木]
+    ```
+    - 干支转阴阳
+    ```php
+    echo \Shiren\TAM\Algorithm::gz2o(10); // 10[戌] -> 1[阳]
+    ```
+    > Algorithm可以缩写为A
+  - 中文字符串化
+    - 数字转地支
+    ```php
+    echo \Shiren\TAM\Str::z(1, 2);
+    ```
+      - 数字转五神
+    ```php
+    echo \Shiren\TAM\Str::spirits(1, 2);
+    ```

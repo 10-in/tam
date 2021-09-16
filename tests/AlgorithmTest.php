@@ -4,9 +4,9 @@ use PHPUnit\Framework\TestCase;
 use Shiren\TAM\Algorithm;
 
 /**
- * 基础测试(正向测试)
+ * 算法测试(主要是正向测试)
  */
-class BaseTest extends TestCase
+class AlgorithmTest extends TestCase
 {
     /**
      * 测试干支转换为对应的阴阳
@@ -113,7 +113,59 @@ class BaseTest extends TestCase
     public function testGanChong()
     {
         foreach ([[0, 6], [1, 7], [2, 8], [3, 9]] as $item) {
-            $this->assertTrue(Algorithm::gh($item[0], $item[1]));
+            $this->assertTrue(Algorithm::gc($item[0], $item[1]));
         }
+    }
+
+    /**
+     * 判断地支合
+     */
+    public function testZhiHe()
+    {
+        foreach ([[0, 1], [2, 11], [3, 10], [4, 9], [5, 8], [6, 7]] as $couple) {
+            $this->assertTrue(Algorithm::zh($couple[0], $couple[1]));
+        }
+    }
+
+    /**
+     * 判断地支冲
+     */
+    public function testZhiCHong()
+    {
+        foreach ([[0, 6], [1, 7], [2, 8], [3, 9], [4, 10], [5, 11]] as $couple) {
+            $this->assertTrue(Algorithm::zc($couple[0], $couple[1]));
+        }
+    }
+
+    /**
+     * 判断干的偏移
+     */
+    public function testGanOffset()
+    {
+        for ($i = 0; $i < 9; $i++) {
+            $this->assertEquals($i + 1, Algorithm::nextG($i));
+        }
+        $this->assertEquals(0, Algorithm::nextG(9));
+
+        for ($i = 9; $i > 0; $i--) {
+            $this->assertEquals($i - 1, Algorithm::prevG($i));
+        }
+        $this->assertEquals(9, Algorithm::prevG(0));
+    }
+
+    /**
+     * 判断支的偏移
+     */
+    public function testZhiOffset()
+    {
+        for ($i = 0; $i < 11; $i++) {
+            $this->assertEquals($i + 1, Algorithm::nextZ($i));
+        }
+        $this->assertEquals(0, Algorithm::nextZ(11));
+
+        for ($i = 10; $i > 0; $i--) {
+            $this->assertEquals($i - 1, Algorithm::prevZ($i));
+        }
+        $this->assertEquals(11, Algorithm::prevZ(0));
     }
 }
