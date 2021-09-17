@@ -168,4 +168,36 @@ class AlgorithmTest extends TestCase
         }
         $this->assertEquals(11, Algorithm::prevZ(0));
     }
+
+    /**
+     * 测试是3合
+     */
+    public function testIs3He()
+    {
+        $rs = [
+            [0, 4, 8],
+            [1, 5, 9],
+            [2, 6, 10],
+            [3, 7, 11]
+        ];
+        foreach ($rs as $r) {
+            $this->assertTrue(Algorithm::is3He($r[0], $r[1], $r[2]));
+        }
+    }
+
+    /**
+     * 测试是三会
+     */
+    public function testIs3Hui()
+    {
+        $rs = [
+            [11, 0, 1],
+            [2, 3, 4],
+            [5, 6, 7],
+            [8, 9, 10],
+        ];
+        foreach ($rs as $r) {
+            $this->assertTrue(Algorithm::is3Hui($r[0], $r[1], $r[2]));
+        }
+    }
 }

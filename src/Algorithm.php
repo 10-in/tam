@@ -128,6 +128,39 @@ class Algorithm
     }
 
     /**
+     * 三合(增强中间)
+     * @param int $a
+     * @param int $b
+     * @param int $c
+     * @return bool
+     */
+    public static function is3He(int $a, int $b, int $c): bool
+    {
+        $r = [$a, $b, $c];
+        sort($r, SORT_NUMERIC);
+        return ($r[0] + 4) == $r[1] && ($r[0] + 8) == $r[2];
+    }
+
+    /**
+     * 三会(增强前两个)
+     * @param int $a
+     * @param int $b
+     * @param int $c
+     * @return bool
+     */
+    public static function is3Hui(int $a, int $b, int $c): bool
+    {
+        $r = [$a, $b, $c];
+        sort($r, SORT_NUMERIC);
+        if (in_array($r[0], [2, 5, 8])) {
+            return ($r[0] + 1) == $r[1] && ($r[0] + 2) == $r[2];
+        } elseif ($r[0] == 0) {
+            return $r[1] == 1 && $r[2] == 11;
+        }
+        return false;
+    }
+
+    /**
      * 下一个天干索引
      * @param int $i
      * @return int
