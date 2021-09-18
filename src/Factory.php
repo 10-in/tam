@@ -5,8 +5,8 @@ namespace Shiren\TAM;
 use Exception;
 
 /**
- * @method g(string $pinyin): int 根据拼音获得天干的索引
- * @method z(string $pinyin): int 根据拼音获得地支的索引
+ * @method static g(string $spell): int 根据拼音获得天干的索引
+ * @method static z(string $spell): int 根据拼音获得地支的索引
  */
 class Factory
 {
@@ -16,13 +16,13 @@ class Factory
     /**
      * @throws Exception
      */
-    public function __call($name, $arguments)
+    public static function __callStatic($name, $arguments)
     {
         if ($name == 'g') {
             return self::GM[$arguments];
         } elseif ($name == 'z') {
             return self::ZM[$arguments];
         }
-        throw new Exception('method is not exist');
+        throw new Exception('method is not exist in ' . static::class);
     }
 }
