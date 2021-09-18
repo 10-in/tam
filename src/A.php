@@ -2,4 +2,6 @@
 
 namespace Shiren\TAM;
 
-class A extends Algorithm {}
+class A extends Algorithm {
+
+}
