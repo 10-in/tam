@@ -132,13 +132,18 @@ class Algorithm
      * @param int $a
      * @param int $b
      * @param int $c
+     * @param bool $ips is position sensitive 位置敏感
      * @return bool
      */
-    public static function is3He(int $a, int $b, int $c): bool
+    public static function is3He(int $a, int $b, int $c, bool $ips=false): bool
     {
-        $r = [$a, $b, $c];
-        sort($r, SORT_NUMERIC);
-        return ($r[0] + 4) == $r[1] && ($r[0] + 8) == $r[2];
+        if ($ips) {
+            return in_array("$a.$b.$c", ['2.6.10', '5.9.1', '8.0.4', '11.3.7']);
+        } else {
+            $r = [$a, $b, $c];
+            sort($r, SORT_NUMERIC);
+            return ($r[0] + 4) == $r[1] && ($r[0] + 8) == $r[2];
+        }
     }
 
     /**
@@ -146,18 +151,23 @@ class Algorithm
      * @param int $a
      * @param int $b
      * @param int $c
+     * @param bool $ips is position sensitive 位置敏感
      * @return bool
      */
-    public static function is3Hui(int $a, int $b, int $c): bool
+    public static function is3Hui(int $a, int $b, int $c, bool $ips=false): bool
     {
-        $r = [$a, $b, $c];
-        sort($r, SORT_NUMERIC);
-        if (in_array($r[0], [2, 5, 8])) {
-            return ($r[0] + 1) == $r[1] && ($r[0] + 2) == $r[2];
-        } elseif ($r[0] == 0) {
-            return $r[1] == 1 && $r[2] == 11;
+        if ($ips) {
+            return in_array("$a.$b.$c", ['2.3.4', '5.6.7', '8.9.10', '11.0.1']);
+        } else {
+            $r = [$a, $b, $c];
+            sort($r, SORT_NUMERIC);
+            if (in_array($r[0], [2, 5, 8])) {
+                return ($r[0] + 1) == $r[1] && ($r[0] + 2) == $r[2];
+            } elseif ($r[0] == 0) {
+                return $r[1] == 1 && $r[2] == 11;
+            }
+            return false;
         }
-        return false;
     }
 
     /**
