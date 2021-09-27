@@ -42,7 +42,7 @@ class Algorithm
 
     /**
      * 根据两五行元素获取对应的五神关系索引
-     * @param int $ie 月支五行
+     * @param int $ie 日干五行
      * @param int $oe 其他五行
      * @return int
      */
