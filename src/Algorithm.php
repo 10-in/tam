@@ -211,6 +211,26 @@ class Algorithm
     }
 
     /**
+     * 年上起月法
+     * @param int $yearGan 年干
+     * @return int 月干(月支都从寅开始)
+     */
+    public static function year2month(int $yearGan): int
+    {
+        return (($yearGan % 5 + 1) * 2) % 10;
+    }
+
+    /**
+     * 日上起时法
+     * @param int $dayGan 日干
+     * @return int 时干(时支都从子开始)
+     */
+    public static function day2hour(int $dayGan): int
+    {
+        return ($dayGan % 5) * 2;
+    }
+
+    /**
      * 环形偏移下一个
      * @param int $current 当前
      * @param int $size 环形内数值个数
