@@ -200,4 +200,24 @@ class AlgorithmTest extends TestCase
             $this->assertTrue(Algorithm::is3Hui($r[0], $r[1], $r[2]));
         }
     }
+
+    public function testYear2Month()
+    {
+        $map = "2468024680";
+        $s = '';
+        for ($i = 0;$i < 10; $i++) {
+            $s .= Algorithm::year2month($i);
+        }
+        $this->assertEquals($map, $s);
+    }
+
+    public function testDay2Hour()
+    {
+        $map = "0246802468";
+        $s = '';
+        for ($i = 0;$i < 10; $i++) {
+            $s .= Algorithm::day2hour($i);
+        }
+        $this->assertEquals($map, $s);
+    }
 }
