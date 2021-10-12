@@ -171,6 +171,32 @@ class Algorithm
     }
 
     /**
+     * 干支合(天地鸳鸯媾合)
+     * @param int $g
+     * @param int $z
+     * @return bool
+     */
+    public static function gzh(int $g, int $z): bool
+    {
+        $g1 = Definition::ZwG[$z][0];
+        $g > $g1 && list($g, $g1) = [$g1, $g]; // 重新排序小的在前大的在后
+        return static::gh($g, $g1);
+    }
+
+    /**
+     * 干支冲(天地鸳鸯媾冲)
+     * @param int $g
+     * @param int $z
+     * @return bool
+     */
+    public static function gzc(int $g, int $z): bool
+    {
+        $g1 = Definition::ZwG[$z][0];
+        $g > $g1 && list($g, $g1) = [$g1, $g]; // 重新排序小的在前大的在后
+        return static::gc($g, $g1);
+    }
+
+    /**
      * 下一个天干索引
      * @param int $i
      * @return int
