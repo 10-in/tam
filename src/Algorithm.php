@@ -179,8 +179,7 @@ class Algorithm
     public static function gzh(int $g, int $z): bool
     {
         $g1 = Definition::ZwG[$z][0];
-        $g > $g1 && list($g, $g1) = [$g1, $g]; // 重新排序小的在前大的在后
-        return static::gh($g, $g1);
+        return abs($g - $g1) == 5;
     }
 
     /**
@@ -192,8 +191,20 @@ class Algorithm
     public static function gzc(int $g, int $z): bool
     {
         $g1 = Definition::ZwG[$z][0];
-        $g > $g1 && list($g, $g1) = [$g1, $g]; // 重新排序小的在前大的在后
-        return static::gc($g, $g1);
+        return abs($g - $g1) == 6;
+    }
+
+    /**
+     * 地支暗媾合
+     * @param int $z1
+     * @param int $z2
+     * @return bool
+     */
+    public static function zac(int $z1, int $z2): bool
+    {
+        $g1 = Definition::ZwG[$z1][0];
+        $g2 = Definition::ZwG[$z2][0];
+        return abs($g1 - $g2) == 5;
     }
 
     /**
