@@ -220,4 +220,11 @@ class AlgorithmTest extends TestCase
         }
         $this->assertEquals($map, $s);
     }
+
+    public function testMasterQiOfGan()
+    {
+        foreach (\Shiren\TAM\Definition::ZwG as $z => $gs) {
+            $this->assertEquals(Algorithm::z2e($z), Algorithm::g2e($gs[0]), "主气错误{$z}, $gs[0]");
+        }
+    }
 }
