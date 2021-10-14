@@ -2,6 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 use Shiren\TAM\Algorithm;
+use Shiren\TAM\Definition;
 
 /**
  * 算法测试(主要是正向测试)
@@ -13,7 +14,7 @@ class AlgorithmTest extends TestCase
      */
     public function testGanAndZhi2Opposite()
     {
-        $rs = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0];
+        $rs = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]; // 依次为甲乙丙丁(子丑寅卯)···对应的阴阳
         for ($i = 0; $i < 12; $i++) {
             $res = Algorithm::gz2o($i);
             $this->assertEquals($res, $rs[$i]);
@@ -25,7 +26,7 @@ class AlgorithmTest extends TestCase
      */
     public function testGan2Element()
     {
-        $rs = [1, 1, 2, 2, 3, 3, 4, 4, 0, 0];
+        $rs = [1, 1, 2, 2, 3, 3, 4, 4, 0, 0]; // 依次为甲乙丙丁···对应的五行索引
         for ($i = 0; $i < 10; $i++) {
             $res = Algorithm::g2e($i);
             $this->assertEquals($res, $rs[$i]);
@@ -37,7 +38,7 @@ class AlgorithmTest extends TestCase
      */
     public function testZhi2Element()
     {
-        $rs = [0, 3, 1, 1, 3, 2, 2, 3, 4, 4, 3, 0];
+        $rs = [0, 3, 1, 1, 3, 2, 2, 3, 4, 4, 3, 0]; // 依次为子丑寅卯···对应的五行地支
         for ($i = 0; $i < 12; $i++) {
             $res = Algorithm::z2e($i);
             $this->assertEquals($res, $rs[$i]);
@@ -50,11 +51,12 @@ class AlgorithmTest extends TestCase
     public function testElementRelation()
     {
         $rs = [
-            [1, 2, 3, 4, 0],
-            [0, 1, 2, 3, 4],
-            [4, 0, 1, 2, 3],
-            [3, 4, 0, 1, 2],
-            [2, 3, 4, 0, 1],
+        //  水  木 火  土 金
+            [1, 2, 3, 4, 0], // 水
+            [0, 1, 2, 3, 4], // 木
+            [4, 0, 1, 2, 3], // 火
+            [3, 4, 0, 1, 2], // 土
+            [2, 3, 4, 0, 1], // 金
         ];
         for ($i = 0; $i < 5; $i++) {
             for ($o = 0; $o < 5; $o++) {
@@ -68,7 +70,7 @@ class AlgorithmTest extends TestCase
      */
     public function testTypeIsStrong()
     {
-        $rs = [true, true, false, false, false];
+        $rs = [true, true, false, false, false]; // 依次为"印比伤才杀"的命强命弱
         for ($i = 0; $i < 5; $i++) {
             $this->assertEquals(Algorithm::strong($i), $rs[$i]);
         }
@@ -103,7 +105,12 @@ class AlgorithmTest extends TestCase
     public function testGanHe()
     {
         foreach ([[0, 5], [1, 6], [2, 7], [3, 8], [4, 9]] as $item) {
-            $this->assertTrue(Algorithm::gh($item[0], $item[1]));
+            list($g1, $g2) = $item;
+            $this->assertTrue(Algorithm::gh($g1, $g2)); // 判断天干合
+            for ($i = 0; $i < 10; $i++) {
+                if ($i <= $g1 || $i == $g2) continue;
+                $this->assertFalse(Algorithm::gh($g1, $i)); // 判断非天干合
+            }
         }
     }
 
@@ -113,7 +120,12 @@ class AlgorithmTest extends TestCase
     public function testGanChong()
     {
         foreach ([[0, 6], [1, 7], [2, 8], [3, 9]] as $item) {
-            $this->assertTrue(Algorithm::gc($item[0], $item[1]));
+            list($g1, $g2) = $item;
+            $this->assertTrue(Algorithm::gc($g1, $g2)); // 判断天干冲
+            for ($i = 0; $i < 10; $i++) {
+                if ($i <= $g1 || $i == $g2) continue;
+                $this->assertFalse(Algorithm::gc($g1, $i)); // 判断非天干冲
+            }
         }
     }
 
@@ -123,7 +135,12 @@ class AlgorithmTest extends TestCase
     public function testZhiHe()
     {
         foreach ([[0, 1], [2, 11], [3, 10], [4, 9], [5, 8], [6, 7]] as $couple) {
-            $this->assertTrue(Algorithm::zh($couple[0], $couple[1]));
+            list($z1, $z2) = $couple;
+            $this->assertTrue(Algorithm::zh($z1, $z2)); // 判断地支合
+            for ($i = 0; $i < 10; $i++) {
+                if ($i <= $z1 || $i == $z2) continue;
+                $this->assertFalse(Algorithm::zh($z1, $i)); // 判断非地支合
+            }
         }
     }
 
@@ -133,7 +150,12 @@ class AlgorithmTest extends TestCase
     public function testZhiCHong()
     {
         foreach ([[0, 6], [1, 7], [2, 8], [3, 9], [4, 10], [5, 11]] as $couple) {
-            $this->assertTrue(Algorithm::zc($couple[0], $couple[1]));
+            list($z1, $z2) = $couple;
+            $this->assertTrue(Algorithm::zc($z1, $z2)); // 判断地支冲
+            for ($i = 0; $i < 10; $i++) {
+                if ($i <= $z1 || $i == $z2) continue;
+                $this->assertFalse(Algorithm::zc($z1, $i)); // 判断非地支冲
+            }
         }
     }
 
@@ -175,13 +197,16 @@ class AlgorithmTest extends TestCase
     public function testIs3He()
     {
         $rs = [
-            [0, 4, 8],
-            [1, 5, 9],
-            [2, 6, 10],
-            [3, 7, 11]
+            [8,  0,  4],
+            [5,  9,  1],
+            [2,  6, 10],
+            [11, 3, 7]
         ];
         foreach ($rs as $r) {
-            $this->assertTrue(Algorithm::is3He($r[0], $r[1], $r[2]));
+            $this->assertTrue(Algorithm::is3He($r[0], $r[1], $r[2])); // 位置不敏感
+        }
+        foreach ($rs as $r) {
+            $this->assertTrue(Algorithm::is3He($r[0], $r[1], $r[2], true)); // 位置敏感
         }
     }
 
@@ -198,6 +223,9 @@ class AlgorithmTest extends TestCase
         ];
         foreach ($rs as $r) {
             $this->assertTrue(Algorithm::is3Hui($r[0], $r[1], $r[2]));
+        }
+        foreach ($rs as $r) {
+            $this->assertTrue(Algorithm::is3Hui($r[0], $r[1], $r[2], true));
         }
     }
 
@@ -223,7 +251,7 @@ class AlgorithmTest extends TestCase
 
     public function testMasterQiOfGan()
     {
-        foreach (\Shiren\TAM\Definition::ZwG as $z => $gs) {
+        foreach (Definition::ZwG as $z => $gs) {
             $this->assertEquals(Algorithm::z2e($z), Algorithm::g2e($gs[0]), "主气错误{$z}, $gs[0]");
         }
     }
