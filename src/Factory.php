@@ -37,4 +37,30 @@ class Factory
     {
         return self::Type[$spell];
     }
+
+    /**
+     * 中文天干转天干索引
+     * @param string $chinese
+     * @return int
+     */
+    public static function chinese2g(string $chinese): int
+    {
+        return static::search($chinese, Definition::Gan);
+    }
+
+    /**
+     * 中文地支转地支索引
+     * @param string $chinese
+     * @return int
+     */
+    public static function chinese2z(string $chinese): int
+    {
+        return static::search($chinese, Definition::Zhi);
+    }
+
+    private static function search(string $chinese, array $map): int
+    {
+        $index = array_search($chinese, $map);
+        return $index !== false ? $index : -1;
+    }
 }
