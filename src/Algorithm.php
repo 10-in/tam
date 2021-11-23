@@ -113,7 +113,7 @@ class Algorithm
     {
         return $b - $a == 6;
     }
-    
+
     /**
      * 地支相合
      * @example 地支合是阴阳相吸，阴支配阳支，按环形排列，则以0，1和6，7分别为分界中线，两两相合，如代入卯3->戌10可以得出两者为合的关系
@@ -286,6 +286,18 @@ class Algorithm
     {
         return ($dayGan % 5) * 2;
     }
+
+
+    /**
+     * 天干地址索引转为60甲子索引
+     * @param int $g 天干索引
+     * @param int $z 地支索引
+     * @return float|int
+     */
+    public static function gz2ci(int $g, int $z) {
+        return 5 * (($g + 12 - $z) % 12) + $g;
+    }
+
 
     /**
      * 环形偏移下一个
